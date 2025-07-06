@@ -1,0 +1,24 @@
+{
+  "projects": [
+    {
+      "project": "SAMP RP",
+      "servers": [
+        {
+          "fullname": "SAMP RP | Revolution",
+          "name": "Revolution",
+          "address": "1:1"
+        },
+        {
+          "fullname": "SAMP RP | Legacy",
+          "name": "Legacy",
+          "address": "1:1"
+        },
+        {
+          "fullname": "SAMP RP | Renaissance",
+          "name": "Renaissance",
+          "address": "1:1"
+        }
+      ]
+    }
+  ]
+}
