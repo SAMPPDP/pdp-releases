@@ -1,27 +1,28 @@
 {
   "script": {
     "version": "8.0.0",
-    "version_number": 100
+    "version_number": 100,
+    "filename": "PD-Project.lua",
   },
   "projects": [
     {
-      "pid": 1,
+      "project_id": 1,
       "name": "SAMP RP",
       "servers": [
         {
-          "sid": 1,
+          "server_id": 1,
           "fullname": "SAMP RP | Revolution",
           "name": "Revolution",
           "address": "5.252.33.123:7777"
         },
         {
-          "sid": 2,
+          "server_id": 2,
           "fullname": "SAMP RP | Legacy",
           "name": "Legacy",
           "address": "5.252.33.202:7777"
         },
         {
-          "sid": 3,
+          "server_id": 3,
           "fullname": "SAMP RP | Renaissance",
           "name": "Renaissance",
           "address": "5.252.33.201:7777"
