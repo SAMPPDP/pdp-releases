@@ -24,6 +24,6 @@ jobs:
           luarocks install dkjson
           luarocks install sha1
 
-      - name: test
+      - name: test update_lib_json.lua
         run: |
-          busted ci/test.lua -o utfTerminal
+          busted ci/update_lib_json.lua -o utfTerminal
