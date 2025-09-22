@@ -1,9 +1,12 @@
 local lfs = require('lfs')
 local sha1 = require('sha1')
-local json = require('dkjson')
+local json = require('cjson')
 
-local repos = '${{ github.repository }}'
-local branch = '${{ github.sha }}'
+local repos = 'GITHUB_REPOS'
+local branch = 'GITHUB_BRANCH'
+
+print(repos)
+print(branch)
 
 local function smallPath(path)
     local small = path:match('[^/]+$')
@@ -27,6 +30,7 @@ local function addDir(path, tree)
     }
 end
 
+-- work!
 local function scan_directory(path)
     local file_attributes = lfs.attributes(path)
     local tree = {}
@@ -65,18 +69,16 @@ end
 
 local lib = {
     timestamp = os.time(),
-    tree = scan_directory('lua/lib')
+    tree = scan_directory('lib') -- path work!
 }
 
-local lib_json = json.encode(lib, { indent = 2 })
+local lib_json = json.encode(lib)
 
 print(lib_json)
 
-local file_json, errmsg = io.open('lua/lib/info.json', 'w')
+local file_json, errmsg = io.open('lib.json', 'w')
 if not file_json or errmsg then
-    error('cannon create new file_json, error: ' .. errmsg)
+    error('cannon create new file json, error: ' .. errmsg)
 end
 file_json:write()
 file_json:close()
-
-print('Json Writen')

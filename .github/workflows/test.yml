@@ -6,23 +6,59 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - name: Connect Checkout (v5)
+        id: connect_checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
-      - uses: leafo/gh-actions-lua@v11
+      - name: Connect Lua (v11, build v5.1)
+        id: connect_lua
+        uses: leafo/gh-actions-lua@v11
         with:
           luaVersion: "5.1"
 
-      - uses: leafo/gh-actions-luarocks@v5
+      - name: Connect LuaRocks (v5, build v3.11.1)
+        id: connect_luarocks
+        uses: leafo/gh-actions-luarocks@v5
         with:
           luaRocksVersion: "3.11.1"
 
-      - name: build
+      - name: Install LuaRocks package
+        id: install_package_luarocks
         run: |
-          luarocks install busted
-          luarocks install luafilesystem
-          luarocks install dkjson
           luarocks install sha1
+          luarocks install lua-cjson
+          luarocks install luafilesystem
+          luarocks install busted
 
-      - name: test update_lib_json.lua
+      - name: Substitute variables
+        id: substitute_vars
         run: |
-          busted ci/update_lib_json.lua -o utfTerminal
+          sed -i "s/GITHUB_REPOS/$(echo ${{ github.repository }})/" .github/ci/update_lib_json.lua
+          sed -i "s/GITHUB_BRANCH/$(echo ${{ github.sha }})/" .github/ci/update_lib_json.lua
+          echo "::set-output name=substituted::true"
+
+      - name: Generate Data Lib
+        id: generate_data_lib
+        run: |
+          busted .github/ci/update_lib_json.lua -o utfTerminal
+
+      - name: Commit lib.json
+        id: commit_lib_json
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add lib.json
+          git commit -m "feat: Update lib.json" || echo "No changes to commit"
+
+      - name: Create Pull Request
+        id: create_pr_lib_json
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "feat: Update lib.json"
+          title: "Update lib.json"
+          body: "This PR updates lib.json based on changes in folder lib."
+          branch: update-lib-json
+          base: main
