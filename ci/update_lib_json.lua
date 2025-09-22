@@ -5,11 +5,6 @@ local function scan_directory(path)
   print('PATH! ' .. path)
   local file_attributes = lfs.attributes(path)
 
-  if not file_attributes then
-    print('Error getting attributes for: ' .. path)
-    return
-  end
-
   if file_attributes.mode == 'file' then
     print('File: ' .. path)
     --! FILE !--
@@ -19,14 +14,7 @@ local function scan_directory(path)
     end
     return
   elseif file_attributes.mode == 'directory' then
-    local directory_iterator = lfs.dir(path)
-
-    if type(directory_iterator) ~= 'function' then
-      print('Error opening directory: ' .. path)
-      return
-    end
-
-    for entry in directory_iterator do
+    for entry in lfs.dir(path) do
       if entry ~= '.' and entry ~= '..' then
         local full_path = path .. '/' .. entry
         scan_directory(full_path) -- Recursive call
