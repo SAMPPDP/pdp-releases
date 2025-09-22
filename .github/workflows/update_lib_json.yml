@@ -5,18 +5,10 @@ on:
     branches:
       - main
       - develop
-    # paths-ignore:
-    #   - ".github/workflows/**"
-    # paths:
-    #   - "lua/lib/**"
   pull_request:
     branches:
       - main
       - develop
-    # paths-ignore:
-    #   - ".github/workflows/**"
-    # paths:
-    #   - "lua/lib/**"
   pull_request_target: # required to prevent the deleted-branch issue
 
 jobs:
@@ -47,7 +39,7 @@ jobs:
         id: uuid
         run: |
           echo "NEW_UUID=$(uuidgen)" >> $GITHUB_ENV
-          echo "::set-output name=random::$(date +%s%N)" # Force re-evaluation
+          echo "::set-output name=random::$(date +%s%N)" #Force re-evaluation
 
       - name: Calculate SHA1 Hashes and Generate JSON
         id: generate_json
@@ -62,27 +54,27 @@ jobs:
           # Function to create JSON for a file
           create_file_json() {
             local file="$1"
-            local relative_path=$(echo "$file" | sed 's#^\./##') # Remove leading ./ if present. Its important
+            local relative_path=$(echo "$file" | sed 's#^\./##') # Remove leading ./ if present. It's important
 
             local sha1=$(calculate_sha1 "$file")
-            echo '{
-              "name": "$file",
-              "type": "file",
-              "sha1": "$sha1",
-              "url_raw": "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/$BRANCH_NAME/lua/lib/$relative_path"
-            }'
+            echo "{
+              \"name\": \"$relative_path\",
+              \"type\": \"file\",
+              \"sha1\": \"$sha1\",
+              \"url_raw\": \"https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/$BRANCH_NAME/lua/lib/$relative_path\"
+            }"
           }
 
           # Function to create JSON for a directory
           create_dir_json() {
             local dir="$1"
             echo "{
-                \"name\": \"$dir\",
-                \"type\": \"dir\",
-                \"tree\": ["
+              \"name\": \"$dir\",
+              \"type\": \"dir\",
+              \"tree\": ["
             find "$dir" -type f -print0 | while IFS= read -r -d $'\0' file; do
               echo -n "$(create_file_json \"$file\")"
-              # Check if its the last file in the directory
+              # Check if it's the last file in the directory
               find "$dir" -type f -print0 | wc -l | grep -vq "^1$" && echo -n ","
               echo
             done
@@ -109,12 +101,10 @@ jobs:
             fi
           done
 
-          # Close json
           echo '  ]' >> lib.json
           echo '}' >> lib.json
 
-          # Store the result to be accessible later
-          echo "::set-output name=json_output::$(cat lib.json)"
+          echo "::set-output name=json_output::$(cat lib.json)" #Store the result to be accessible later.
 
       - name: Commit and Push Changes
         run: |
