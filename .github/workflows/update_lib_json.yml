@@ -1,0 +1,121 @@
+name: Update lib.json
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      # - another
+      # - faeature/*  # Добавьте другие ветки, если необходимо
+  pull_request:
+    branches:
+      - main
+      - develop
+      # - another
+      # - faeature/*  # Добавьте другие ветки, если необходимо
+  pull_request_target: # required to prevent the deleted-branch issue
+
+jobs:
+  update_json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Required to get the correct branch name
+          ref: ${{ github.event.pull_request.head.sha }}  # Check out the specific commit of the PR
+
+      - name: Get Branch Name
+        id: get_branch
+        run: |
+          if github.event_name == 'pull_request_target'; then
+            BRANCH_NAME=$(echo "${{ github.event.pull_request.head.ref }}")
+          else
+            BRANCH_NAME=$(echo "${GITHUB_REF#refs/heads/}") # Extract branch name
+          fi
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Generate UUID
+        id: uuid
+        run: |
+          echo "NEW_UUID=$(uuidgen)" >> $GITHUB_ENV
+          echo "::set-output name=random::$(date +%s%N)" #Force re-evaluation
+
+      - name: Calculate SHA1 Hashes and Generate JSON
+        id: generate_json
+        run: |
+          cd lua/lib
+
+          # Function to calculate SHA1 for a file
+          calculate_sha1() {
+            sha1sum "$1" | awk '{print $1}'
+          }
+
+          # Function to create JSON for a file
+          create_file_json() {
+            local file="$1"
+            local relative_path=$(echo "$file" | sed 's#^\./##') # Remove leading ./ if present. It's important
+
+            local sha1=$(calculate_sha1 "$file")
+            echo "{
+                \"name\": \"$relative_path\",
+                \"type\": \"file\",
+                \"sha1\": \"$sha1\",
+                \"url_raw\": \"https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/$BRANCH_NAME/lua/lib/$relative_path\"
+              }"
+          }
+
+          # Function to create JSON for a directory
+          create_dir_json() {
+            local dir="$1"
+            echo "{
+                \"name\": \"$dir\",
+                \"type\": \"dir\",
+                \"tree\": ["
+            find "$dir" -type f -print0 | while IFS= read -r -d $'\0' file; do
+              echo -n "$(create_file_json \"$file\")"
+              # Check if it's the last file in the directory
+              find "$dir" -type f -print0 | wc -l | grep -vq "^1$" && echo -n ","
+              echo
+            done
+            echo "]}"
+          }
+
+          # Generate the complete JSON structure
+          echo '{' > lib.json
+          echo '  "environment": "'"$BRANCH_NAME"'",' >> lib.json
+          echo '  "version": "'"$NEW_UUID"'",' >> lib.json #Use GITHUB_ENV
+          echo '  "tree": [' >> lib.json
+
+          # Iterate through files and directories in lua/lib
+          first=true
+          for item in *; do
+            if [ "$first" = false ]; then
+              echo "," >> lib.json
+            fi
+            first=false
+            if [ -f "$item" ]; then
+              create_file_json "$item" >> lib.json
+            elif [ -d "$item" ]; then
+              create_dir_json "$item" >> lib.json
+            fi
+          done
+
+          # Close json
+          echo '  ]' >> lib.json
+          echo '}' >> lib.json
+
+          # Store the result to be accessible later
+          echo "::set-output name=json_output::$(cat lib.json)"
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add lua/lib/lib.json
+          git commit -m "Update lib.json with new version and SHA1 hashes" || echo "No changes to commit"
+          git push origin main
