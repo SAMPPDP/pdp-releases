@@ -1,9 +1,4 @@
 local lfs = require('lfs')
-local dkjson = require('dkjson')
-local sha1 = require('sha1')
-
--- local path_github = lfs.currentdir() -- /home/runner/work/releases/%current_repos%
--- local path_lib = path_github .. '/lua/lib'
 
 local function scan_directory(path)
   print('PATH! ' .. path)
@@ -16,12 +11,12 @@ local function scan_directory(path)
 
   if file_attributes.mode == 'file' then
     print('File: ' .. path)
-    -- print('  -- заметка: можно применить file = io.open(' .. path .. ', 'r') чтобы читать файл')
+    --! FILE !--
     local file, err = io.open(path)
     if not file or err then
       error(path .. '(type: ' .. type(file) .. ') -> Error: ' .. err)
     end
-    return -- Stop scanning if it's a file
+    return
   elseif file_attributes.mode == 'directory' then
     local directory_iterator = lfs.dir(path)
 
@@ -41,9 +36,4 @@ local function scan_directory(path)
   end
 end
 
-local current_dir = lfs.currentdir()
-print(current_dir)
-
-scan_directory(current_dir) -- Start scanning from the current directory
-
--- local str_json = dkjson.encode(data, { indent = 4 })
+scan_directory('lua/lib')
