@@ -72,7 +72,7 @@ local lib = {
     tree = scan_directory('lib') -- path work!
 }
 
-local lib_json = json.encode(lib)
+local lib_json = json.encode(lib, { indent = 2 })
 
 print(lib_json)
 
