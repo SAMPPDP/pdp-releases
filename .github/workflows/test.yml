@@ -32,16 +32,10 @@ jobs:
           luarocks install luafilesystem
           luarocks install busted
 
-      - name: Write variables to file
-        run: |
-          echo "GITHUB_REPOS=${{ github.repository }}" > vars.env
-          echo "GITHUB_BRANCH=${{ github.ref_name }}" >> vars.env
-
       - name: Substitute variables
         run: |
-          source vars.env
-          sed -i "s/GITHUB_REPOS/\${GITHUB_REPOS}/g" .github/ci/update_lib_json.lua
-          sed -i "s/GITHUB_BRANCH/\${GITHUB_BRANCH}/g" .github/ci/update_lib_json.lua
+          sed -i 's/GITHUBREPOS/"\"\${{ github.repository }}\""/g' .github/ci/update_lib_json.lua
+          sed -i 's/GITHUBBRANCH/"\"\${{ github.ref_name }}\""/g' .github/ci/update_lib_json.lua
 
       - name: Generate Data Lib
         id: generate_data_lib

@@ -2,8 +2,8 @@ local lfs = require('lfs')
 local sha1 = require('sha1')
 local json = require('cjson')
 
-local repos = ('GITHUB_REPOS'):gsub('[\'\"]', '')
-local branch = ('GITHUB_BRANCH'):gsub('[\'\"]', '')
+local repos = ('GITHUBREPOS'):gsub('[\'\"]', '')
+local branch = ('GITHUBBRANCH'):gsub('[\'\"]', '')
 
 print(repos)
 print(branch)
