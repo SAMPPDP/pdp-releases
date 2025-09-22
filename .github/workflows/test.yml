@@ -24,4 +24,4 @@ jobs:
 
       - name: test
         run: |
-          busted .lua/bin/_test.luDa -o utfTerminal
+          busted ci/test.lua -o utfTerminal
