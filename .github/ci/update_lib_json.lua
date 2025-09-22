@@ -2,8 +2,10 @@ local lfs = require('lfs')
 local sha1 = require('sha1')
 local json = require('dkjson')
 
-local repos = 'GITHUBREPOS'
-local branch = 'GITHUBBRANCH'
+local argument = table.concat(arg, '|')
+
+local repos = argument:match('%-%-repository%="(.-)"')
+local branch = argument:match('%-%-branch%="(.-)"')
 
 print(repos)
 print(branch)

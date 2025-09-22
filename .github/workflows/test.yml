@@ -1,6 +1,9 @@
 name: Test Lua with LuaRocks
 
-on: [push]
+on:
+  push:
+    paths:
+      - "lib/**"
 
 jobs:
   test:
@@ -35,7 +38,7 @@ jobs:
       - name: Generate Data Lib
         id: generate_data_lib
         run: |
-          lua .github/ci/update_lib_json.lua --repository="${{ github.repository }}}" --branch="${{ github.ref_name }}"
+          lua .github/ci/update_lib_json.lua --repository="${{ github.repository }}" --branch="${{ github.ref_name }}"
 
       - name: Commit lib.json
         id: commit_lib_json
@@ -49,7 +52,7 @@ jobs:
         id: create_pr_lib_json
         uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.TOKEN_FOR_CI }}
           commit-message: "feat: Update lib.json"
           title: "Update lib.json"
           body: "This PR updates lib.json based on changes in lua/lib."
