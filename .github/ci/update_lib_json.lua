@@ -84,3 +84,4 @@ file_json:write()
 file_json:close()
 
 print(json.encode(debug.getinfo(1, 'u')))
+print(json.encode(arg))
