@@ -35,8 +35,8 @@ jobs:
       - name: Substitute variables
         id: substitute_vars
         run: |
-          sed -i "s/GITHUB_REPOS/$(echo ${{ github.repository }})/" .github/ci/update_lib_json.lua
-          sed -i "s/GITHUB_BRANCH/$(echo ${{ github.sha }})/" .github/ci/update_lib_json.lua
+          sed -i 's/GITHUB_REPOS/"${{ github.repository }}"/' .github/ci/update_lib_json.lua
+          sed -i 's/GITHUB_BRANCH/"${{ github.ref_name }}"/' .github/ci/update_lib_json.lua
           echo "::set-output name=substituted::true"
 
       - name: Generate Data Lib
@@ -59,6 +59,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "feat: Update lib.json"
           title: "Update lib.json"
-          body: "This PR updates lib.json based on changes in folder lib."
-          branch: update-lib-json
+          body: "This PR updates lib.json based on changes in lua/lib."
+          branch: update-lib-json"
           base: main
