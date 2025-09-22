@@ -28,7 +28,7 @@ jobs:
         id: install_package_luarocks
         run: |
           luarocks install sha1
-          luarocks install lua-cjson
+          luarocks install dkjson
           luarocks install luafilesystem
           luarocks install busted
 

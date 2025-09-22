@@ -1,6 +1,6 @@
 local lfs = require('lfs')
 local sha1 = require('sha1')
-local json = require('cjson')
+local json = require('dkjson')
 
 local repos = 'GITHUBREPOS'
 local branch = 'GITHUBBRANCH'
