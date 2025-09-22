@@ -1,37 +1,82 @@
 local lfs = require('lfs')
+local sha1 = require('sha1')
 local json = require('dkjson')
 
-local function scan_directory(path)
-  print('PATH! ' .. path)
-  local file_attributes = lfs.attributes(path)
+local repos = '${{ github.repository }}'
+local branch = '${{ github.sha }}'
 
-  if file_attributes.mode == 'file' then
-    print('File: ' .. path)
-    --! FILE !--
-    local file, err = io.open(path)
-    if not file or err then
-      error(path .. '(type: ' .. type(file) .. ') -> Error: ' .. err)
-    end
-    return
-  elseif file_attributes.mode == 'directory' then
-    for entry in lfs.dir(path) do
-      if entry ~= '.' and entry ~= '..' then
-        local full_path = path .. '/' .. entry
-        scan_directory(full_path) -- Recursive call
-      end
-    end
-  else
-    print('Unknown entry: ' .. path .. ' (mode: ' .. file_attributes.mode .. ')')
-  end
+local function smallPath(path)
+    local small = path:match('[^/]+$')
+    return small
 end
 
-local attributes = lfs.attributes('lua/lib')
-local att_str = json.encode(attributes, { indent = 4 })
-print(att_str)
+local function addFile(path, source_binary)
+    return {
+        name = smallPath(path),
+        type = 'file',
+        sha1 = sha1.sha1(source_binary),
+        url_raw = string.format('https://raw.githubusercontent.com/%s/%s/%s', repos, branch, path)
+    }
+end
 
-local current_att_dir = lfs.currentdir()
-local current_att = lfs.attributes(current_att_dir)
-local current_att_str = json.encode(current_att, { indent = 4 })
-print(current_att_str)
+local function addDir(path, tree)
+    return {
+        name = smallPath(path),
+        type = 'dir',
+        tree = tree or {}
+    }
+end
 
-scan_directory('lua/lib')
+local function scan_directory(path)
+    local file_attributes = lfs.attributes(path)
+    local tree = {}
+
+    if not file_attributes then
+        error('Error getting attributes for: ' .. path)
+    end
+
+    if file_attributes.mode == 'file' then
+        local file, err = io.open(path, 'rb')
+        if not file or err then
+            error(path .. ' | Type: ' .. type(file) .. ' -> Error: ' .. err)
+        end
+        local source_binary = file:read('*a')
+        file:close()
+        table.insert(tree, addFile(path, source_binary))
+    elseif file_attributes.mode == 'directory' then
+        local entries = {}
+        for entry in lfs.dir(path) do
+            if entry ~= '.' and entry ~= '..' then
+                local full_path = path .. '/' .. entry
+                local subtree = scan_directory(full_path)
+                if subtree then
+                    for i = 1, #subtree do
+                        table.insert(entries, subtree[i])
+                    end
+                end
+            end
+        end
+        table.insert(tree, addDir(path, entries))
+    else
+        error('Unknown entry: ' .. path .. ' (mode: ' .. file_attributes.mode .. ')')
+    end
+    return tree
+end
+
+local lib = {
+    timestamp = os.time(),
+    tree = scan_directory('lua/lib')
+}
+
+local lib_json = json.encode(lib, { indent = 2 })
+
+print(lib_json)
+
+local file_json, errmsg = io.open('lua/lib/info.json', 'w')
+if not file_json or errmsg then
+    error('cannon create new file_json, error: ' .. errmsg)
+end
+file_json:write()
+file_json:close()
+
+print('Json Writen')
