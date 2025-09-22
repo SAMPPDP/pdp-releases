@@ -1,4 +1,5 @@
 local lfs = require('lfs')
+local json = require('dkjson')
 
 local function scan_directory(path)
   print('PATH! ' .. path)
@@ -35,5 +36,14 @@ local function scan_directory(path)
     print('Unknown entry: ' .. path .. ' (mode: ' .. file_attributes.mode .. ')')
   end
 end
+
+local attributes = lfs.attributes('lua/lib')
+local att_str = json.encode(attributes, { indent = 4 })
+print(att_str)
+
+local current_att_dir = lfs.currentdir()
+local current_att = lfs.attributes(current_att_dir)
+local current_att_str = json.encode(current_att, { indent = 4 })
+print(current_att_str)
 
 scan_directory('lua/lib')
