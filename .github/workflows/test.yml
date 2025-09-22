@@ -55,6 +55,6 @@ jobs:
           token: ${{ secrets.TOKEN_FOR_CI }}
           commit-message: "feat: Update lib.json"
           title: "Update lib.json"
-          body: "This PR updates lib.json based on changes in lua/lib."
+          body: "This PR updates lib.json based on changes in lib."
           branch: update-lib-json"
           base: main

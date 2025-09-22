@@ -2,7 +2,7 @@ local lfs = require('lfs')
 local sha1 = require('sha1')
 local json = require('dkjson')
 
-local argument = table.concat(arg, ' ')
+local argument = table.concat(arg, '   ')
 print(argument)
 
 local repos = argument:match('repository=(%S+)')
@@ -83,8 +83,5 @@ local file_json, errmsg = io.open('lib.json', 'w')
 if not file_json or errmsg then
     error('cannon create new file json, error: ' .. errmsg)
 end
-file_json:write()
+file_json:write(lib_json)
 file_json:close()
-
-print(json.encode(debug.getinfo(1, 'u'), { indent = 2 }))
-print(json.encode(arg, { indent = 2 }))
