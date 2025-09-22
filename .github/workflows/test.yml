@@ -7,15 +7,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: leafo/gh-actions-luarocks@v5
+
       - uses: leafo/gh-actions-lua@v11
         with:
           luaVersion: "5.1.5"
 
-      - name: build
+      - name: Setup LuaRocks
+        uses: leafo/gh-actions-luarocks@v5
+        with:
+          luaRocksVersion: "3.11.1"
+          luaVersion: "5.1.5"
         run: |
           luarocks install busted
 
       - name: test
         run: |
-          busted .lua/bin/_test.lua -o utfTerminal
+          busted .lua/bin/_test.luDa -o utfTerminal
