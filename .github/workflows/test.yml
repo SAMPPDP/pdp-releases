@@ -1,0 +1,21 @@
+name: Test Lua with LuaRocks
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leafo/gh-actions-luarocks@v5
+      - uses: leafo/gh-actions-lua@v11
+        with:
+        luaVersion: "5.1.5"
+
+      - name: build
+        run: |
+          luarocks install busted
+
+      - name: test
+        run: |
+          busted .lua/bin/_test.lua -o utfTerminal
