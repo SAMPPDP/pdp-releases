@@ -9,8 +9,7 @@ local function scan_directory(path)
   local directory_iterator, error_message = lfs.dir(path)
 
   if not directory_iterator then
-    print('Error opening directory: ' .. path .. ' - ' .. error_message)
-    return
+    error('Error opening directory: ' .. path .. ' - ' .. error_message)
   end
 
   for entry in directory_iterator do
@@ -42,6 +41,6 @@ local function scan_directory(path)
   end
 end
 
-scan_directory('.') -- Start scanning from the current directory
+scan_directory(lfs.currentdir()) -- Start scanning from the current directory
 
 -- local str_json = dkjson.encode(data, { indent = 4 })
