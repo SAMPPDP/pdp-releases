@@ -2,8 +2,8 @@ local lfs = require('lfs')
 local sha1 = require('sha1')
 local json = require('cjson')
 
-local repos = ('GITHUBREPOS'):gsub('[\'\"]', '')
-local branch = ('GITHUBBRANCH'):gsub('[\'\"]', '')
+local repos = 'GITHUBREPOS'
+local branch = 'GITHUBBRANCH'
 
 print(repos)
 print(branch)
@@ -82,3 +82,5 @@ if not file_json or errmsg then
 end
 file_json:write()
 file_json:close()
+
+print(json.encode(debug.getinfo(1, 'S')))
