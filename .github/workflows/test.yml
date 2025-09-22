@@ -25,4 +25,5 @@ jobs:
 
       - name: test update_lib_json.lua
         run: |
+          cd lua/lib
           busted ci/update_lib_json.lua -o utfTerminal
