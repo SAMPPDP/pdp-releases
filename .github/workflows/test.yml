@@ -16,11 +16,13 @@ jobs:
         uses: leafo/gh-actions-luarocks@v5
         with:
           luaRocksVersion: "3.11.1"
-          luaVersion: "5.1.5"
 
       - name: build
         run: |
           luarocks install busted
+          luarocks install luafilesystem
+          luarocks install dkjson
+          luarocks install sha1
 
       - name: test
         run: |
