@@ -5,8 +5,8 @@ local json = require('dkjson')
 local argument = table.concat(arg, ' ')
 print(argument)
 
-local repos = argument:match('repository="(.-)"')
-local branch = argument:match('branch="(.-)"')
+local repos = argument:match('repository=(%S+)')
+local branch = argument:match('branch=(%S+)')
 
 print(repos)
 print(branch)
