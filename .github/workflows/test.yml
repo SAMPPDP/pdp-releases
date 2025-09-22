@@ -34,8 +34,8 @@ jobs:
 
       - name: Substitute variables
         run: |
-          sed -i 's/GITHUBREPOS/"\"\${{ github.repository }}\""/g' .github/ci/update_lib_json.lua
-          sed -i 's/GITHUBBRANCH/"\"\${{ github.ref_name }}\""/g' .github/ci/update_lib_json.lua
+          sed -i "s/GITHUBREPOS/${{ github.repository }}/g" .github/ci/update_lib_json.lua
+          sed -i "s/GITHUBBRANCH/${{ github.ref_name }}/g" .github/ci/update_lib_json.lua
 
       - name: Generate Data Lib
         id: generate_data_lib
