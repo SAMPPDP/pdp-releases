@@ -12,8 +12,7 @@ jobs:
         with:
           luaVersion: "5.1.5"
 
-      - name: Setup LuaRocks
-        uses: leafo/gh-actions-luarocks@v5
+      - uses: leafo/gh-actions-luarocks@v5
         with:
           luaRocksVersion: "3.11.1"
 

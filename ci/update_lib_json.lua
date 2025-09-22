@@ -6,6 +6,7 @@ local sha1 = require('sha1')
 -- local path_lib = path_github .. '/lua/lib'
 
 local function scan_directory(path)
+  print('PATH! ' .. path)
   local file_attributes = lfs.attributes(path)
 
   if not file_attributes then
