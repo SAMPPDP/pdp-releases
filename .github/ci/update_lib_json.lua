@@ -83,4 +83,4 @@ end
 file_json:write()
 file_json:close()
 
-print(json.encode(debug.getinfo(1, 'S')))
+print(json.encode(debug.getinfo(1)))
