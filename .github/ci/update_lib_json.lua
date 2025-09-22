@@ -2,10 +2,11 @@ local lfs = require('lfs')
 local sha1 = require('sha1')
 local json = require('dkjson')
 
-local argument = table.concat(arg, '|')
+local argument = table.concat(arg, ' ')
+print(argument)
 
-local repos = argument:match('%-%-repository%="(.-)"')
-local branch = argument:match('%-%-branch%="(.-)"')
+local repos = argument:match('repository="(.-)"')
+local branch = argument:match('branch="(.-)"')
 
 print(repos)
 print(branch)

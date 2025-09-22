@@ -38,7 +38,7 @@ jobs:
       - name: Generate Data Lib
         id: generate_data_lib
         run: |
-          lua .github/ci/update_lib_json.lua --repository="${{ github.repository }}" --branch="${{ github.ref_name }}"
+          lua .github/ci/update_lib_json.lua repository="${{ github.repository }}" branch="${{ github.ref_name }}"
 
       - name: Commit lib.json
         id: commit_lib_json
