@@ -83,5 +83,6 @@ local file_json, errmsg = io.open('lib.json', 'w')
 if not file_json or errmsg then
     error('cannon create new file json, error: ' .. errmsg)
 end
+---@diagnostic disable-next-line: param-type-mismatch
 file_json:write(lib_json)
 file_json:close()
