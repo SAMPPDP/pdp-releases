@@ -52,7 +52,7 @@ jobs:
         id: create_pr_lib_json
         uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ secrets.TOKEN_FOR_CI }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "feat: Update lib.json"
           title: "Update lib.json"
           body: "This PR updates lib.json based on changes in lib."
