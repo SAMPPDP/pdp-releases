@@ -19,6 +19,7 @@ end
 local function addFile(path, source_binary)
     return {
         name = smallPath(path),
+        path = path,
         type = 'file',
         sha1 = sha1.sha1(source_binary),
         url_raw = string.format('https://raw.githubusercontent.com/%s/%s/%s', repos, branch, path)
@@ -28,12 +29,13 @@ end
 local function addDir(path, tree)
     return {
         name = smallPath(path),
+        path = path,
         type = 'dir',
         tree = tree or {}
     }
 end
 
-local function scan_directory(path)
+local function scan_directory(path, small_path)
     local file_attributes = lfs.attributes(path)
     local tree = {}
 
