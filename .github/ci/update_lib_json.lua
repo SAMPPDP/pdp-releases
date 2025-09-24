@@ -70,10 +70,12 @@ local function scan_directory(path)
     return tree
 end
 
-local tree = scan_directory('lib')
-tree.timestamp, tree.name, tree.type = os.time(), nil, nil
+local tree_lib = {
+    timesatmp = os.time(),
+    lib = scan_directory('lib').tree
+}
 
-local lib_json = json.encode(tree, { indent = 4 })
+local lib_json = json.encode(tree_lib, { indent = 4 })
 
 print(lib_json)
 
