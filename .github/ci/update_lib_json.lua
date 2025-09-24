@@ -73,7 +73,7 @@ local function scan_directory(path)
 end
 
 local lib_json = json.encode({
-    timesatmp = os.time(),
+    timestamp = os.time(),
     lib = scan_directory('lib')[1].tree
 }, {
     indent = 4
