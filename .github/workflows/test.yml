@@ -6,24 +6,18 @@ on:
       - "lib/**"
 
 jobs:
-  test:
+  update_lib_json:
     runs-on: ubuntu-latest
     steps:
-      - name: Connect Checkout (v5)
-        id: connect_checkout
-        uses: actions/checkout@v5
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
-      - name: Connect Lua (v11, build v5.1)
-        id: connect_lua
-        uses: leafo/gh-actions-lua@v11
+      - uses: leafo/gh-actions-lua@v11
         with:
           luaVersion: "5.1"
 
-      - name: Connect LuaRocks (v5, build v3.11.1)
-        id: connect_luarocks
-        uses: leafo/gh-actions-luarocks@v5
+      - uses: leafo/gh-actions-luarocks@v5
         with:
           luaRocksVersion: "3.11.1"
 
@@ -35,10 +29,16 @@ jobs:
           luarocks install luafilesystem
           luarocks install busted
 
-      - name: Generate Data Lib
+      - name: Generate data in lib.json
         id: generate_data_lib
         run: |
           lua .github/ci/update_lib_json.lua repository="${{ github.repository }}" branch="${{ github.ref_name }}"
+
+      - name: Clear build lua and luarocks
+        id: clear_build
+        run: |
+          rm -rf .lua
+          rm -rf .luarocks
 
       - name: Commit lib.json
         id: commit_lib_json
@@ -46,15 +46,15 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git add lib.json
-          git commit -m "feat: Update lib.json" || echo "No changes to commit"
+          git commit -m "ci: Update lib.json" || echo "No changes to commit"
 
       - name: Create Pull Request
         id: create_pr_lib_json
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "feat: Update lib.json"
-          title: "Update lib.json"
-          body: "This PR updates lib.json based on changes in lib."
-          branch: update-lib-json"
+          commit-message: "ci: Update lib.json"
+          title: Update lib.json
+          body: This PR updates lib.json based on changes in lib.
+          branch: update-lib-json
           base: main
