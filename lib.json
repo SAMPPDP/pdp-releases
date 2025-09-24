@@ -1,171 +1,171 @@
 {
-  "timesatmp":1758736057,
+  "timesatmp":1758736303,
   "lib":[{
-      "path":"lib/moonloader.lua",
+      "path":"moonloader.lua",
       "name":"moonloader.lua",
       "sha1":"bbd656cb0e94e9791b18b78fe43f58024d3f4be2",
       "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/moonloader.lua",
       "type":"file"
     },{
-      "path":"lib/grok.lua",
+      "path":"grok.lua",
       "name":"grok.lua",
       "sha1":"3fc136397f91be733681a854f9077c577ab6bc61",
       "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/grok.lua",
       "type":"file"
     },{
-      "path":"lib/base64.lua",
+      "path":"base64.lua",
       "name":"base64.lua",
       "sha1":"68db04382cc2227f4e44401d7aff3b86c0dde439",
       "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/base64.lua",
       "type":"file"
     },{
-      "path":"lib/test6.txt",
-      "name":"test6.txt",
-      "sha1":"da39a3ee5e6b4b0d3255bfef95601890afd80709",
-      "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/test6.txt",
-      "type":"file"
-    },{
       "tree":[{
-          "path":"lib/MoonMonet/init.lua",
+          "path":"MoonMonet/init.lua",
           "name":"init.lua",
           "sha1":"1561fdd5975233dda0b536c1493d7ee500150c88",
           "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/MoonMonet/init.lua",
           "type":"file"
         },{
-          "path":"lib/MoonMonet/moonmonet_rs.dll",
+          "path":"MoonMonet/moonmonet_rs.dll",
           "name":"moonmonet_rs.dll",
           "sha1":"8aa486f6a7e783835be904be019eb554728c8c61",
           "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/MoonMonet/moonmonet_rs.dll",
           "type":"file"
         }],
-      "path":"lib/MoonMonet",
+      "path":"MoonMonet",
       "name":"MoonMonet",
       "type":"dir"
     },{
-      "path":"lib/HTTP_ASYNC.dll",
+      "path":"HTTP_ASYNC.dll",
       "name":"HTTP_ASYNC.dll",
       "sha1":"fc9042aa5f43f3720042948251c5b4cb5b9b4f01",
       "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/HTTP_ASYNC.dll",
       "type":"file"
     },{
-      "path":"lib/sampfuncs.lua",
+      "path":"sampfuncs.lua",
       "name":"sampfuncs.lua",
       "sha1":"f6fbd425348515a02251da3b39bbf986ae391f9a",
       "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/sampfuncs.lua",
       "type":"file"
     },{
       "tree":[{
-          "path":"lib/mimgui/dx9.lua",
+          "path":"mimgui/dx9.lua",
           "name":"dx9.lua",
           "sha1":"a567b23e866fe7d9af6f7d33bd864d6b84cb6cd7",
           "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/mimgui/dx9.lua",
           "type":"file"
         },{
-          "path":"lib/mimgui/cdefs.lua",
+          "path":"mimgui/cdefs.lua",
           "name":"cdefs.lua",
           "sha1":"03fc8ff02bc9b253488a8e4026d3266e909cecdb",
           "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/mimgui/cdefs.lua",
           "type":"file"
         },{
-          "path":"lib/mimgui/init.lua",
+          "path":"mimgui/init.lua",
           "name":"init.lua",
           "sha1":"2fdf8e0c7701b44dad10a10e27b34ace78146bfa",
           "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/mimgui/init.lua",
           "type":"file"
         },{
-          "path":"lib/mimgui/win32.lua",
+          "path":"mimgui/win32.lua",
           "name":"win32.lua",
           "sha1":"6efcb97b2e1a4920e790056cea4e9ce08be3d0d9",
           "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/mimgui/win32.lua",
           "type":"file"
         },{
-          "path":"lib/mimgui/imgui.lua",
+          "path":"mimgui/imgui.lua",
           "name":"imgui.lua",
           "sha1":"b82f8ddbdfa714742e83acda786a6a42ff38fa41",
           "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/mimgui/imgui.lua",
           "type":"file"
         },{
-          "path":"lib/mimgui/cimguidx9.dll",
+          "path":"mimgui/cimguidx9.dll",
           "name":"cimguidx9.dll",
           "sha1":"becba5e5c86a58b3443b5ecdfa7af8fef9b48269",
           "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/mimgui/cimguidx9.dll",
           "type":"file"
         }],
-      "path":"lib/mimgui",
+      "path":"mimgui",
       "name":"mimgui",
       "type":"dir"
     },{
-      "path":"lib/carbJsonConfig.lua",
+      "path":"carbJsonConfig.lua",
       "name":"carbJsonConfig.lua",
       "sha1":"1b849f8513728dd6a697f274a2b572f7d5f00bbb",
       "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/carbJsonConfig.lua",
       "type":"file"
     },{
-      "path":"lib/dkjson.lua",
+      "path":"dkjson.lua",
       "name":"dkjson.lua",
       "sha1":"19b27918b411b52b1c2b0061dd479672cb746687",
       "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/dkjson.lua",
       "type":"file"
     },{
+      "path":"test7.txt",
+      "name":"test7.txt",
+      "sha1":"da39a3ee5e6b4b0d3255bfef95601890afd80709",
+      "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/test7.txt",
+      "type":"file"
+    },{
       "tree":[{
           "tree":[{
-              "path":"lib/samp/events/core.lua",
+              "path":"samp/events/core.lua",
               "name":"core.lua",
               "sha1":"237c7be08eeb2395659e4cdd4e1dfdfd35ce9de7",
               "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/samp/events/core.lua",
               "type":"file"
             },{
-              "path":"lib/samp/events/extra_types.lua",
+              "path":"samp/events/extra_types.lua",
               "name":"extra_types.lua",
               "sha1":"d794212438f7cde59b0fcc5839f640296ca037df",
               "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/samp/events/extra_types.lua",
               "type":"file"
             },{
-              "path":"lib/samp/events/bitstream_io.lua",
+              "path":"samp/events/bitstream_io.lua",
               "name":"bitstream_io.lua",
               "sha1":"d976960c43246ac2c01b3d027a69048961a83fc8",
               "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/samp/events/bitstream_io.lua",
               "type":"file"
             },{
-              "path":"lib/samp/events/utils.lua",
+              "path":"samp/events/utils.lua",
               "name":"utils.lua",
               "sha1":"9a3b40e6182c0460cc12749c7c6e2c0c1cca3f0a",
               "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/samp/events/utils.lua",
               "type":"file"
             },{
-              "path":"lib/samp/events/handlers.lua",
+              "path":"samp/events/handlers.lua",
               "name":"handlers.lua",
               "sha1":"ed595b7e3c4213178413678fb325dd49ac4a1b90",
               "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/samp/events/handlers.lua",
               "type":"file"
             }],
-          "path":"lib/samp/events",
+          "path":"samp/events",
           "name":"events",
           "type":"dir"
         },{
-          "path":"lib/samp/events.lua",
+          "path":"samp/events.lua",
           "name":"events.lua",
           "sha1":"4c7565ccfdd48c6d9d7baab7759f062bcdd2600b",
           "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/samp/events.lua",
           "type":"file"
         },{
-          "path":"lib/samp/raknet.lua",
+          "path":"samp/raknet.lua",
           "name":"raknet.lua",
           "sha1":"5ecb918c1de70aecf64e4b9472db26bc8a137fe5",
           "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/samp/raknet.lua",
           "type":"file"
         },{
-          "path":"lib/samp/synchronization.lua",
+          "path":"samp/synchronization.lua",
           "name":"synchronization.lua",
           "sha1":"965312ac3a84c5ddf4ab555c74dc0de7fd5cc93e",
           "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/samp/synchronization.lua",
           "type":"file"
         }],
-      "path":"lib/samp",
+      "path":"samp",
       "name":"samp",
       "type":"dir"
     },{
-      "path":"lib/reflect.lua",
+      "path":"reflect.lua",
       "name":"reflect.lua",
       "sha1":"685de6a445a487bc468e22b85a33678e8a732e2f",
       "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/reflect.lua",
