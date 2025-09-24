@@ -43,18 +43,8 @@ jobs:
       - name: Commit lib.json
         id: commit_lib_json
         run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
           git add lib.json
-          git commit -m "ci: Update lib.json" || echo "No changes to commit"
-
-      - name: Create Pull Request
-        id: create_pr_lib_json
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "ci: Update lib.json"
-          title: Update lib.json
-          body: This PR updates lib.json based on changes in lib.
-          branch: update-lib-json
-          base: main
+          git commit -m "Update lib.json with new version and SHA1 hashes" || echo "No changes to commit"
+          git push origin main
