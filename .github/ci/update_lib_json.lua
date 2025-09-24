@@ -33,7 +33,6 @@ local function addDir(path, tree)
     }
 end
 
--- work!
 local function scan_directory(path)
     local file_attributes = lfs.attributes(path)
     local tree = {}
@@ -70,12 +69,12 @@ local function scan_directory(path)
     return tree
 end
 
-local tree_lib = {
+local lib_json = json.encode({
     timesatmp = os.time(),
-    lib = scan_directory('lib').tree
-}
-
-local lib_json = json.encode(tree_lib, { indent = 4 })
+    lib = scan_directory('lib')[1].tree
+}, {
+    indent = 4
+})
 
 print(lib_json)
 
@@ -84,6 +83,5 @@ if not file_json or errmsg then
     error('cannon create new file json, error: ' .. errmsg)
 end
 
----@diagnostic disable-next-line: param-type-mismatch
 file_json:write(lib_json)
 file_json:close()
