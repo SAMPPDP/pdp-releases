@@ -19,7 +19,7 @@ end
 local function addFile(path, source_binary)
     return {
         name = smallPath(path),
-        path = path,
+        path = path:gsub('^lib%/', ''),
         type = 'file',
         sha1 = sha1.sha1(source_binary),
         url_raw = string.format('https://raw.githubusercontent.com/%s/%s/%s', repos, branch, path)
@@ -29,13 +29,13 @@ end
 local function addDir(path, tree)
     return {
         name = smallPath(path),
-        path = path,
+        path = path:gsub('^lib%/', ''),
         type = 'dir',
         tree = tree or {}
     }
 end
 
-local function scan_directory(path, small_path)
+local function scan_directory(path)
     local file_attributes = lfs.attributes(path)
     local tree = {}
 
@@ -68,6 +68,7 @@ local function scan_directory(path, small_path)
     else
         error('Unknown entry: ' .. path .. ' (mode: ' .. file_attributes.mode .. ')')
     end
+
     return tree
 end
 
@@ -77,8 +78,6 @@ local lib_json = json.encode({
 }, {
     indent = 4
 })
-
-print(lib_json)
 
 local file_json, errmsg = io.open('lib.json', 'w')
 if not file_json or errmsg then
