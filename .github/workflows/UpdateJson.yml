@@ -1,12 +1,13 @@
-name: Update script json
+name: Update script, library json
 
 on:
   push:
     paths:
+      - "lib/**"
       - "PD-Project.luac"
 
 jobs:
-  update_lib_json:
+  update_json:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -26,24 +27,19 @@ jobs:
         run: |
           luarocks install sha1
           luarocks install dkjson
-          luarocks install busted
+          luarocks install luafilesystem
 
-      - name: Generate data in lib.json
+      - name: Generate data script, library json
         id: generate_data_lib
         run: |
-          lua .github/ci/update_script_json.lua repository=${{ github.repository }} branch=${{ github.ref_name }} filename=PD-Project.luac
-
-      - name: Clear build lua and luarocks
-        id: clear_build
-        run: |
-          rm -rf .lua
-          rm -rf .luarocks
+          lua .github/ci/update_json.lua repository="${{ github.repository }}" branch="${{ github.ref_name }}" filename="PD-Project.luac"
 
       - name: Commit lib.json
         id: commit_lib_json
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
+          git add lib.json
           git add script.json
-          git commit -m "Update script json" || echo "No changes to commit"
+          git commit -m "Update script, library json" || echo "No changes to commit"
           git push origin main

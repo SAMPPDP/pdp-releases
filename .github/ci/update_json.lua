@@ -5,6 +5,7 @@ local json = require('dkjson')
 local argument = table.concat(arg, '   ')
 local repos = argument:match('repository=(%S+)')
 local branch = argument:match('branch=(%S+)')
+local filename = argument:match('filename=(.-%.luac?)')
 
 local function smallPath(path)
     local small = path:match('[^/]+$')
@@ -65,16 +66,43 @@ local function scan_directory(path)
     return tree
 end
 
-local lib_json = json.encode({
-    timestamp = os.time(),
-    lib = scan_directory('lib')[1].tree
-}, {
-    indent = 4
-})
+do
+    -- lib
+    local lib_json = json.encode({
+        timestamp = os.time(),
+        lib = scan_directory('lib')[1].tree
+    }, {
+        indent = 4
+    })
 
-local file_json, errmsg_json = io.open('lib.json', 'w')
-if not file_json or errmsg_json then
-    error('cannon create new file json, error: ' .. errmsg_json)
+    local file_json, errmsg_json = io.open('lib.json', 'w')
+    if not file_json or errmsg_json then
+        error('cannon create new file json, error: ' .. errmsg_json)
+    end
+    file_json:write(lib_json) ---@diagnostic disable-line: param-type-mismatch
+    file_json:close()
 end
-file_json:write(lib_json) ---@diagnostic disable-line: param-type-mismatch
-file_json:close()
+
+do
+    -- script
+    local file, errmsg = io.open(filename, 'rb')
+    assert(file, errmsg)
+    local source_binary = file:read('*a')
+    file:close()
+
+    local script_json = json.encode({
+        timestamp = os.time(),
+        filename = filename,
+        sha1 = sha1.sha1(source_binary),
+        url_raw = string.format('https://raw.githubusercontent.com/%s/%s/%s', repos, branch, filename)
+    }, {
+        indent = 4
+    })
+
+    local file_json, errmsg_json = io.open('script.json', 'w')
+    if not file_json or errmsg_json then
+        error('cannon create new file json, error: ' .. errmsg_json)
+    end
+    file_json:write(script_json) ---@diagnostic disable-line: param-type-mismatch
+    file_json:close()
+end
