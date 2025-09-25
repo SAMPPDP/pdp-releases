@@ -6,7 +6,7 @@ on:
       - "lib/**"
 
 jobs:
-  update_lib_json:
+  update_script_json:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
