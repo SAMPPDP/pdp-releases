@@ -1,4 +1,4 @@
-name: Test Lua with LuaRocks
+name: Update library json
 
 on:
   push:
@@ -32,7 +32,7 @@ jobs:
       - name: Generate data in lib.json
         id: generate_data_lib
         run: |
-          lua .github/ci/update_lib_json.lua repository="${{ github.repository }}" branch="${{ github.ref_name }}"
+          lua .github/ci/update_lib_json.lua repository=${{ github.repository }} branch=${{ github.ref_name }}
 
       - name: Clear build lua and luarocks
         id: clear_build
@@ -43,8 +43,8 @@ jobs:
       - name: Commit lib.json
         id: commit_lib_json
         run: |
-          git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
           git add lib.json
-          git commit -m "Update lib.json with new version and SHA1 hashes" || echo "No changes to commit"
+          git commit -m "Update library json" || echo "No changes to commit"
           git push origin main

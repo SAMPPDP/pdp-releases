@@ -1,11 +1,4 @@
 {
-  "script": {
-    "filename": "PD-Project.luac",
-    "version": "8.0.0",
-    "version_number": 100,
-    "md5": "?",
-    "url_raw": "https://raw.githubusercontent.com/SAMPPDP/releases/refs/heads/main/lua/PD-Project.luac"
-  },
   "projects": [
     {
       "project_id": 1,

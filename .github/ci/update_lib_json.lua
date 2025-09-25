@@ -77,10 +77,9 @@ local lib_json = json.encode({
     indent = 4
 })
 
-local file_json, errmsg = io.open('lib.json', 'w')
-if not file_json or errmsg then
-    error('cannon create new file json, error: ' .. errmsg)
+local file_json, errmsg_json = io.open('lib.json', 'w')
+if not file_json or errmsg_json then
+    error('cannon create new file json, error: ' .. errmsg_json)
 end
-
 file_json:write(lib_json) ---@diagnostic disable-line: param-type-mismatch
 file_json:close()
