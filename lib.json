@@ -1,5 +1,4 @@
 {
-  "timesatmp":1758736303,
   "lib":[{
       "path":"moonloader.lua",
       "name":"moonloader.lua",
@@ -95,16 +94,16 @@
       "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/carbJsonConfig.lua",
       "type":"file"
     },{
+      "path":"test8.txt",
+      "name":"test8.txt",
+      "sha1":"da39a3ee5e6b4b0d3255bfef95601890afd80709",
+      "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/test8.txt",
+      "type":"file"
+    },{
       "path":"dkjson.lua",
       "name":"dkjson.lua",
       "sha1":"19b27918b411b52b1c2b0061dd479672cb746687",
       "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/dkjson.lua",
-      "type":"file"
-    },{
-      "path":"test7.txt",
-      "name":"test7.txt",
-      "sha1":"da39a3ee5e6b4b0d3255bfef95601890afd80709",
-      "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/test7.txt",
       "type":"file"
     },{
       "tree":[{
@@ -170,5 +169,6 @@
       "sha1":"685de6a445a487bc468e22b85a33678e8a732e2f",
       "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/reflect.lua",
       "type":"file"
-    }]
+    }],
+  "timestamp":1758736957
 }
