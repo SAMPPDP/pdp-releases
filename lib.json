@@ -87,7 +87,7 @@
           "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/samp/events.lua"
         }]
     },{
-      "sha1":"5e8603a7e43e2cb266a578cc4e56c23d8999d929",
+      "sha1":"3d2147dfc84587021f09505a3d04aa8266a5c4ae",
       "type":"file",
       "name":"test8.txt",
       "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/test8.txt"
@@ -136,5 +136,5 @@
       "name":"carbJsonConfig.lua",
       "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/carbJsonConfig.lua"
     }],
-  "timestamp":1758802691
+  "timestamp":1758804993
 }
