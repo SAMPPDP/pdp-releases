@@ -11,6 +11,7 @@ grok._word         = '%w+'                       -- "USERNAME"
 function grok:new(text)
 	self = setmetatable({}, self)
 	self.patterns = {}
+	-- TEST NEW MESSAGE!
 	if text then self:addPatterns(text) end
 	return self
 end
@@ -92,7 +93,9 @@ function grok:format(data, pattern, verify)
 				return ''
 			end
 			if not datavalue:find('^' .. expanded .. '$') then
-				succ, err = false, ('Malformed data in \"%s\" (%s) field, pattern: [%s](%s)'):format(key, tostring(datavalue), patt, expanded)
+				succ, err = false,
+					('Malformed data in \"%s\" (%s) field, pattern: [%s](%s)'):format(key, tostring(datavalue), patt,
+						expanded)
 				return ''
 			end
 		end

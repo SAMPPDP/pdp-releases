@@ -19,7 +19,6 @@ end
 local function addFile(path, source_binary)
     return {
         name = smallPath(path),
-        path = path:gsub('^lib%/', ''),
         type = 'file',
         sha1 = sha1.sha1(source_binary),
         url_raw = string.format('https://raw.githubusercontent.com/%s/%s/%s', repos, branch, path)
@@ -29,7 +28,6 @@ end
 local function addDir(path, tree)
     return {
         name = smallPath(path),
-        path = path:gsub('^lib%/', ''),
         type = 'dir',
         tree = tree or {}
     }
@@ -84,5 +82,5 @@ if not file_json or errmsg then
     error('cannon create new file json, error: ' .. errmsg)
 end
 
-file_json:write(lib_json)
+file_json:write(lib_json) ---@diagnostic disable-line: param-type-mismatch
 file_json:close()
