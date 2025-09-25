@@ -3,13 +3,8 @@ local sha1 = require('sha1')
 local json = require('dkjson')
 
 local argument = table.concat(arg, '   ')
-print(argument)
-
 local repos = argument:match('repository=(%S+)')
 local branch = argument:match('branch=(%S+)')
-
-print(repos)
-print(branch)
 
 local function smallPath(path)
     local small = path:match('[^/]+$')
