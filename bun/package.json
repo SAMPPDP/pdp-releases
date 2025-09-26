@@ -1,5 +1,5 @@
 {
-  "name": "releases",
+  "name": "bun",
   "module": "index.ts",
   "type": "module",
   "private": true,

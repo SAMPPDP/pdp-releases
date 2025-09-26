@@ -2,7 +2,7 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
-      "name": "releases",
+      "name": "bun",
       "devDependencies": {
         "@types/bun": "latest",
       },

@@ -13,10 +13,15 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: oven-sh/setup-bun@v2
-      - run: |
-          bun install
-          bun run .github/ci/update_json.ts
 
+      - name: Bun build
+        run: |
+          cd bun
+          bun install
+          bun run update_json.ts repository="${{ github.repository }}" branch="${{ github.ref_name }}" filename="PD-Project.luac"
+          cd ..
+
+      # - name:
       #   - name: Generate data script, library json
       #     id: generate_data_lib
       #     run: |
