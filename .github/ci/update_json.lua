@@ -80,7 +80,12 @@ do
         current_file:close()
         local current_json = dkjson.decode(source)
         current_sha1 = current_json.sha1 ---@diagnostic disable-line
+    else
+        error('not found script.json?')
     end
+
+    assert(current_sha1, 'empty sha1?')
+    assert(current_filename, 'empty filename?')
 
     local file_script, errmsg_script = io.open(filename, 'rb')
     assert(file_script, errmsg_script)
@@ -112,20 +117,19 @@ do
     file:close()
 end
 
-for _, dir in ipairs({ 'lib', 'resource' }) do
-    local json = dkjson.encode({
-        timestamp = os.time(),
-        data = scan_directory(dir)[1].tree
-    }, {
-        indent = 4
-    })
+-- TODO: NEED CHECK SHA1!
+-- for _, dir in ipairs({ 'lib', 'resource' }) do
+--     local json = dkjson.encode({
+--         timestamp = os.time(),
+--         data = scan_directory(dir)[1].tree
+--     }, {
+--         indent = 4
+--     })
 
-    local file, errmsg = io.open(dir .. '.json', 'w')
-    if not file or errmsg then
-        error('cannon create new file json, error: ' .. errmsg)
-    end
-    file:write(json) ---@diagnostic disable-line: param-type-mismatch
-    file:close()
-end
-
--- TODO: Check SHA1 if not changed. Not changed directory/files - skip update json
+--     local file, errmsg = io.open(dir .. '.json', 'w')
+--     if not file or errmsg then
+--         error('cannon create new file json, error: ' .. errmsg)
+--     end
+--     file:write(json) ---@diagnostic disable-line: param-type-mismatch
+--     file:close()
+-- end
