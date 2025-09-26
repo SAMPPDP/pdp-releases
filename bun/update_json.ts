@@ -75,7 +75,7 @@ async function calculateSHA1(filePath: string): Promise<string> {
         hash.update(fileContent)
         return hash.digest('hex')
     } catch (err) {
-        console.error('Error calculating SHA1 hash: ', err)
+        console.error('>> Error calculating SHA1 hash: ', err)
         throw err
     }
 }
@@ -100,7 +100,6 @@ async function createFileJson(filePath: string, filename: string): Promise<void>
             const existingContent = await readFile(scriptJsonPath, 'utf-8')
             existingScriptJson = JSON.parse(existingContent) as ScriptJson
         } catch (err) {
-            // File doesn't exist, so it will be created
             console.log('>> script.json does not exist.  Creating...')
         }
 
@@ -147,7 +146,7 @@ async function createFolderJson(folderPath: string, filename: string): Promise<v
 
         if (existingFolderJson && areSha1SumsEqual(currentSha1Sums, existingSha1Sums)) {
             console.log(`>> ${filename}: SHA1 match.  No change needed.`)
-            return // No changes required
+            return
         } else {
             console.log(`>> ${filename}: File content changed.  Updating...`)
         }
@@ -196,7 +195,7 @@ async function buildTree(dirPath: string): Promise<Tree[]> {
 
 async function main() {
     if (!filename) {
-        console.error('Missing filename argument')
+        console.error('>> Missing filename argument')
         process.exit(1)
     }
 
@@ -208,9 +207,9 @@ async function main() {
         await createFileJson(filePath, filename)
         await createFolderJson(uploadLibPath, 'lib.json')
         await createFolderJson(uploadResourcePath, 'resource.json')
-        console.log('All JSON files created successfully.')
+        console.log('>> All JSON files created successfully.')
     } catch (error) {
-        console.error('An error occurred:', error)
+        console.error('>> An error occurred:', error)
         process.exit(1)
     }
 }

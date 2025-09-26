@@ -2,10 +2,10 @@ name: Update script, library and resource in json by Bun
 
 on:
   push:
-    # paths:
-    #   - "PD-Project.luac"
-    #   - "lib/**"
-    #   - "resource/**"
+    paths:
+      - "upload/PD-Project.luac"
+      - "upload/lib/**"
+      - "upload/resource/**"
 
 jobs:
   update-json:
