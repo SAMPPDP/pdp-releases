@@ -35,7 +35,7 @@ async function main() {
     console.log(`Branch: ${branch}`)
     console.log(`Filename: ${filename}`)
 
-    const filePath = resolve(import.meta.dir, '..', 'upload/resource', filename)
+    const filePath = resolve(import.meta.dir, '..', 'upload', filename)
 
     console.log(`Attempting to read file from: ${filePath}`)
 
