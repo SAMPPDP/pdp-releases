@@ -30,6 +30,8 @@ local function addDir(path, tree)
 end
 
 local function scan_directory(path)
+    print('scanning: ' .. path)
+
     local file_attributes = lfs.attributes(path)
     local tree = {}
 
@@ -38,6 +40,7 @@ local function scan_directory(path)
     end
 
     if file_attributes.mode == 'file' then
+        local clock = os.clock()
         local file, err = io.open(path, 'rb')
         if not file or err then
             error(path .. ' | Type: ' .. type(file) .. ' -> Error: ' .. err)
@@ -45,6 +48,7 @@ local function scan_directory(path)
         local source_binary = file:read('*a')
         file:close()
         table.insert(tree, addFile(path, source_binary))
+        print('added file to tree, clock:' .. tostring(os.clock() - clock))
     elseif file_attributes.mode == 'directory' then
         local entries = {}
         for entry in lfs.dir(path) do
