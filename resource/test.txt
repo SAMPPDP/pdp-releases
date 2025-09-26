@@ -1,8 +1,0 @@
-hello
-world
-d
-
-d
-f
-
->

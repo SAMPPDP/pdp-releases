@@ -1,6 +1,6 @@
 local lfs = require('lfs')
 local sha1 = require('sha1')
-local json = require('dkjson')
+local dkjson = require('dkjson')
 
 local argument = table.concat(arg, '   ')
 local repos = argument:match('repository=(%S+)')
@@ -67,42 +67,61 @@ local function scan_directory(path)
 end
 
 do
-    -- lib
-    local lib_json = json.encode({
-        timestamp = os.time(),
-        lib = scan_directory('lib')[1].tree
-    }, {
-        indent = 4
-    })
-
-    local file_json, errmsg_json = io.open('lib.json', 'w')
-    if not file_json or errmsg_json then
-        error('cannon create new file json, error: ' .. errmsg_json)
-    end
-    file_json:write(lib_json) ---@diagnostic disable-line: param-type-mismatch
-    file_json:close()
-end
-
-do
     -- script
-    local file, errmsg = io.open(filename, 'rb')
-    assert(file, errmsg)
-    local source_binary = file:read('*a')
-    file:close()
+    local current_sha1 = nil
+    local current_filename = nil
+    local current_file, current_errmsg = io.open('script.json', 'r')
+    if current_file and not current_errmsg then
+        local source = current_file:read('*a')
+        current_file:close()
+        local current_json = dkjson.decode(source)
+        current_sha1 = current_json.sha1 ---@diagnostic disable-line
+    end
 
-    local script_json = json.encode({
+    local file_script, errmsg_script = io.open(filename, 'rb')
+    assert(file_script, errmsg_script)
+    local source_binary = file_script:read('*a')
+    file_script:close()
+    local script_sha1 = sha1.sha1(source_binary)
+
+    if
+        current_sha1 and current_filename and
+        current_sha1 == script_sha1 and current_filename == filename
+    then
+        return
+    end
+
+    local json = dkjson.encode({
         timestamp = os.time(),
         filename = filename,
-        sha1 = sha1.sha1(source_binary),
+        sha1 = script_sha1,
         url_raw = string.format('https://raw.githubusercontent.com/%s/%s/%s', repos, branch, filename)
     }, {
         indent = 4
     })
 
-    local file_json, errmsg_json = io.open('script.json', 'w')
-    if not file_json or errmsg_json then
-        error('cannon create new file json, error: ' .. errmsg_json)
+    local file, errmsg = io.open('script.json', 'w')
+    if not file or errmsg then
+        error('cannon create new file json, error: ' .. errmsg)
     end
-    file_json:write(script_json) ---@diagnostic disable-line: param-type-mismatch
-    file_json:close()
+    file:write(json) ---@diagnostic disable-line: param-type-mismatch
+    file:close()
 end
+
+for _, dir in ipairs({ 'lib', 'resource' }) do
+    local json = dkjson.encode({
+        timestamp = os.time(),
+        data = scan_directory(dir)[1].tree
+    }, {
+        indent = 4
+    })
+
+    local file, errmsg = io.open(dir .. '.json', 'w')
+    if not file or errmsg then
+        error('cannon create new file json, error: ' .. errmsg)
+    end
+    file:write(json) ---@diagnostic disable-line: param-type-mismatch
+    file:close()
+end
+
+-- TODO: Check SHA1 if not changed. Not changed directory/files - skip update json
