@@ -14,26 +14,19 @@ jobs:
       - uses: actions/checkout@v5
       - uses: oven-sh/setup-bun@v2
 
-      - name: Bun build
+      - name: Build
         run: |
           cd bun
           bun install
           bun run update_json.ts repository="${{ github.repository }}" branch="${{ github.ref_name }}" filename="PD-Project.luac"
           cd ..
 
-      # - name:
-      #   - name: Generate data script, library json
-      #     id: generate_data_lib
-      #     run: |
-      #       lua .github/ci/update_json.lua repository="${{ github.repository }}" branch="${{ github.ref_name }}" filename="PD-Project.luac"
-
-      # - name: Commit lib.json
-      #   id: commit_lib_json
-      #   run: |
-      #     git config --global user.name "GitHub Actions"
-      #     git config --global user.email "actions@github.com"
-      #     git add script.json
-      #     git add lib.json
-      #     git add resource.json
-      #     git commit -m "Update script, library and resource json" || echo "No changes to commit"
-      #     git push origin main
+      - name: Commit
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add upload/script.json
+          git add upload/lib.json
+          git add upload/resource.json
+          git commit -m "Update script, library and resource json" || echo "No changes to commit"
+          git push origin main
