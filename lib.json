@@ -1,5 +1,5 @@
 {
-  "lib":[{
+  "data":[{
       "sha1":"f6fbd425348515a02251da3b39bbf986ae391f9a",
       "type":"file",
       "name":"sampfuncs.lua",
@@ -87,7 +87,7 @@
           "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/samp/events.lua"
         }]
     },{
-      "sha1":"3d2147dfc84587021f09505a3d04aa8266a5c4ae",
+      "sha1":"339663e059cda07283adde1411fd0e5a13f15867",
       "type":"file",
       "name":"test8.txt",
       "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/test8.txt"
@@ -136,5 +136,5 @@
       "name":"carbJsonConfig.lua",
       "url_raw":"https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/lib/carbJsonConfig.lua"
     }],
-  "timestamp":1758804993
+  "timestamp":1758874363
 }
