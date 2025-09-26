@@ -79,6 +79,7 @@ do
         local source = current_file:read('*a')
         current_file:close()
         local current_json = dkjson.decode(source)
+        current_filename = current_json.filename ---@diagnostic disable-line
         current_sha1 = current_json.sha1 ---@diagnostic disable-line
     else
         error('not found script.json?')
