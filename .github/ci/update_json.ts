@@ -17,7 +17,7 @@ async function calculateSHA1(filePath: string): Promise<string> {
 async function main() {
     console.log('Bun started.')
 
-    const filename = 'Radio2.mp3'
+    const filename = 'Radio1.mp3'
     const filePath = join(import.meta.dir, filename)
     console.log(`Full path: ${filePath}`)
 
