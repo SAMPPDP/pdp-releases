@@ -1,11 +1,47 @@
 {
-  "timestamp": 1758885827373,
+  "timestamp": 1763273512995,
   "data": [
     {
       "type": "file",
       "name": "sampfuncs.lua",
       "sha1": "f6fbd425348515a02251da3b39bbf986ae391f9a",
       "raw": "https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/upload/lib/sampfuncs.lua"
+    },
+    {
+      "type": "file",
+      "name": "mimgui_hotkey.lua",
+      "sha1": "959f6262c29901a3cc1ccc9cf329d13b6861fda7",
+      "raw": "https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/upload/lib/mimgui_hotkey.lua"
+    },
+    {
+      "type": "dir",
+      "name": "game",
+      "tree": [
+        {
+          "type": "file",
+          "name": "globals.lua",
+          "sha1": "ab446eb54379bb58426f277217714bc02b0b9c88",
+          "raw": "https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/upload/lib/game/globals.lua"
+        },
+        {
+          "type": "file",
+          "name": "keys.lua",
+          "sha1": "7ddda29003a275e9443c6e149c0a8c2a8bab3780",
+          "raw": "https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/upload/lib/game/keys.lua"
+        },
+        {
+          "type": "file",
+          "name": "weapons.lua",
+          "sha1": "18c6b234e4543e2cbbf02891662473d69bf95a3d",
+          "raw": "https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/upload/lib/game/weapons.lua"
+        },
+        {
+          "type": "file",
+          "name": "models.lua",
+          "sha1": "95d11ebf912b5f4c191f116f9e0b9f7121c75911",
+          "raw": "https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/upload/lib/game/models.lua"
+        }
+      ]
     },
     {
       "type": "file",
@@ -38,6 +74,24 @@
       ]
     },
     {
+      "type": "dir",
+      "name": "windows",
+      "tree": [
+        {
+          "type": "file",
+          "name": "init.lua",
+          "sha1": "3b907f205f36ca2c3c002bcac3520f432b634d59",
+          "raw": "https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/upload/lib/windows/init.lua"
+        },
+        {
+          "type": "file",
+          "name": "message.lua",
+          "sha1": "73626e1db4c258c4e4a3d715961c3df8f1d38a15",
+          "raw": "https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/upload/lib/windows/message.lua"
+        }
+      ]
+    },
+    {
       "type": "file",
       "name": "moonloader.lua",
       "sha1": "bbd656cb0e94e9791b18b78fe43f58024d3f4be2",
@@ -48,6 +102,12 @@
       "name": "reflect.lua",
       "sha1": "685de6a445a487bc468e22b85a33678e8a732e2f",
       "raw": "https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/upload/lib/reflect.lua"
+    },
+    {
+      "type": "file",
+      "name": "bitex.lua",
+      "sha1": "b954f290e4f2e70969178eb5efe51e4b21399068",
+      "raw": "https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/upload/lib/bitex.lua"
     },
     {
       "type": "dir",
@@ -92,7 +152,7 @@
         {
           "type": "file",
           "name": "raknet.lua",
-          "sha1": "5ecb918c1de70aecf64e4b9472db26bc8a137fe5",
+          "sha1": "30f55209b90c4e5e0493d9ed3b74242bc2261b53",
           "raw": "https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/upload/lib/samp/raknet.lua"
         },
         {
@@ -111,9 +171,15 @@
     },
     {
       "type": "file",
-      "name": "test8.txt",
-      "sha1": "a95a27476667c5222429c40941cc7b281e652f5d",
-      "raw": "https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/upload/lib/test8.txt"
+      "name": "hotkey.lua",
+      "sha1": "44007423f8296d095612718a8762068a9b88bae0",
+      "raw": "https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/upload/lib/hotkey.lua"
+    },
+    {
+      "type": "file",
+      "name": "vkeys.lua",
+      "sha1": "b613cb2eb8818faf95adceb9c67589cab9c8436f",
+      "raw": "https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/upload/lib/vkeys.lua"
     },
     {
       "type": "dir",
@@ -159,6 +225,12 @@
     },
     {
       "type": "file",
+      "name": "encoding.lua",
+      "sha1": "78a215aa28b7c31cc9dd7d90ece1b694ff650884",
+      "raw": "https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/upload/lib/encoding.lua"
+    },
+    {
+      "type": "file",
       "name": "HTTP_ASYNC.dll",
       "sha1": "fc9042aa5f43f3720042948251c5b4cb5b9b4f01",
       "raw": "https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/upload/lib/HTTP_ASYNC.dll"
@@ -168,6 +240,18 @@
       "name": "carbJsonConfig.lua",
       "sha1": "1b849f8513728dd6a697f274a2b572f7d5f00bbb",
       "raw": "https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/upload/lib/carbJsonConfig.lua"
+    },
+    {
+      "type": "file",
+      "name": "iconv.dll",
+      "sha1": "6944c38c5d00dfffd16246944d597a3f88210534",
+      "raw": "https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/upload/lib/iconv.dll"
+    },
+    {
+      "type": "file",
+      "name": "fAwesome7.lua",
+      "sha1": "278cbcb5c1c04a9eb5396ff21628cf88ae22aa35",
+      "raw": "https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/upload/lib/fAwesome7.lua"
     }
   ]
 }
