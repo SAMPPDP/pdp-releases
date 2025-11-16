@@ -1,5 +1,5 @@
 {
-  "timestamp": 1758885465977,
+  "timestamp": 1763274092913,
   "data": [
     {
       "type": "file",
@@ -16,6 +16,12 @@
           "name": "fontawesome-webfont.ttf",
           "sha1": "13b1eab65a983c7a73bc7997c479d66943f7c6cb",
           "raw": "https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/upload/resource/fonts/fontawesome-webfont.ttf"
+        },
+        {
+          "type": "file",
+          "name": "Inter_18pt-SemiBold.ttf",
+          "sha1": "f3e44abd6661d5b861e66db22f4f79a6c466cd00",
+          "raw": "https://raw.githubusercontent.com/SAMPPDP/pdp-releases/main/upload/resource/fonts/Inter_18pt-SemiBold.ttf"
         }
       ]
     },
